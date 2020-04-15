@@ -21,7 +21,7 @@ pipeline {
 				branch 'master'
 			}
 			steps {
-			slackSend(color: '#BDFFC3', message: "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}) 
+			slackSend(color: '#BDFFC3', message: "${buildStatus}: `${env.JOB_NAME}`") 
 			}	
 		}
     }
