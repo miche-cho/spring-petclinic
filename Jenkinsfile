@@ -20,8 +20,9 @@ pipeline {
 			when {
 				branch 'master'
 			}
-                        steps {
-			slackSend(color: '#BDFFC3', message: "${buildStatus}: `${env.JOB_NAME}`") 
+            steps {
+				slackSend(color: '#BDFFC3', message: " Deploying, `${env.JOB_NAME}`")
+				sh './mvnw deploy'
 			}
 		}
     }
@@ -34,7 +35,7 @@ pipeline {
             <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
           recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']]
         )
-      slackSend(color: '#BDFFC3', message: "${buildStatus}: `${env.JOB_NAME}`")
+      slackSend(color: '#BDFFC3', message: "SUCCESSFUL ${env.BUILD_NUMBER} ${env.JOB_NAME} (<${env.BUILD_URL}|Open>)")
     }
 
     failure {
