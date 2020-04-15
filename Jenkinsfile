@@ -16,6 +16,14 @@ pipeline {
 				bat './mvnw package'
 			}
 		}
+		stage('Deploy') {
+			when {
+				branch 'master'
+			}
+			steps {
+			slackSend(color: '#BDFFC3', message: "${buildStatus}: `${env.JOB_NAME}` #${env.BUILD_NUMBER}:\n${env.BUILD_URL}) 
+			}	
+		}
     }
 	post {
     success {
